@@ -1,0 +1,6 @@
+*
+!.gitignore
+!*.py
+!*/
+
+# Ignorar arquivos de teste
