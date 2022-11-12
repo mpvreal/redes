@@ -52,7 +52,7 @@ elif sys.argv[1] == 'listen':
             ping = (time_ns() - sent_time) / 1000000
             transfer_rate = len(packet) * 8 / (ping / 1000)
             print(f'Pacote {index}\t\t' + \
-            locale.format_string('%.2f', ping, True) + ' ms\t\t' + \
+            locale.format_string('%.2f', ping, True) + ' ms\t\t' +\
                 locale.format_string('%.2f', transfer_rate, True) \
                     + ' bits/s')
             avg_transf_rate += transfer_rate
