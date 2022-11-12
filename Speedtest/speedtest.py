@@ -19,7 +19,7 @@ def error():
 <protocolo>\n\tPara iniciar listening, insira \"listen\" em <ip>')
     exit(1)
 
-def download_tcp(speedtest):
+def download(speedtest):
     counter = 0
     avg_transfer_rate = 0
 
@@ -77,7 +77,6 @@ def upload_tcp(speedtest):
 
     return avg_transfer_rate
 
-
 def upload_udp(speedtest, peer):
     counter = 0
     avg_transfer_rate = 0
@@ -128,7 +127,7 @@ elif(sys.argv[3] == 'tcp'):
         print(f'Conexão aceita de {address[0]}:{address[1]}')
 
         print('Iniciando teste de download...')
-        speed = download_tcp(speedtest)
+        speed = download(speedtest)
         print(f'Download médio: \t\t' + \
             locale.format_string('%.2f', speed, True) + ' bits/s')
 
@@ -155,7 +154,7 @@ elif(sys.argv[3] == 'tcp'):
             exit(1)
 
         print('Iniciando teste de download...')
-        speed = download_tcp(speedtest)
+        speed = download(speedtest)
         print(f'Download médio: \t\t' + \
             locale.format_string('%.2f', speed, True) + ' bits/s')
 
@@ -174,7 +173,7 @@ elif(sys.argv[3] == 'udp'):
             exit(1)
     
         print('Iniciando teste de download...')
-        speed = download_tcp(speedtest)
+        speed = download(speedtest)
         print(f'Download médio: \t\t' + \
             locale.format_string('%.2f', speed, True) + ' bits/s')
 
@@ -202,7 +201,7 @@ elif(sys.argv[3] == 'udp'):
             exit(1)
 
         print('Iniciando teste de download...')
-        speed = download_tcp(speedtest)
+        speed = download(speedtest)
         print(f'Download médio: \t\t' + \
             locale.format_string('%.2f', speed, True) + ' bits/s')
 else:
