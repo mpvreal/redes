@@ -21,40 +21,21 @@ def error():
 
 def download(speedtest):
     counter = 0
-    avg_transfer_rate = 0
 
     ready = select([speedtest], [], [], 3)[0]
     while ready:
-        start = time_ns()
         if not speedtest.recv(SIZE):
             break
-        elapsed = time_ns() - start
         counter += 1
-
-        ping = elapsed / 1000000
-        transfer_rate = (SIZE * 8 / elapsed) * 1000000000
-        avg_transfer_rate += transfer_rate
-        
-        print(locale.format_string('%.2f', ping, True) + \
-            ' ms\t\t' + \
-            locale.format_string('%.2f', transfer_rate, True) \
-            + ' bits/s')
         
         ready = select([speedtest], [], [], 3)[0]
 
-    try:
-        avg_transfer_rate /= counter
-    except ZeroDivisionError:
-        print(f'Erro: Nenhum pacote recebido.\nAbortando.')
-        exit(1)
-
     print(f'Pacotes recebidos: {counter}')
 
-    return avg_transfer_rate
+    return counter / TIME_SECONDS
 
 def upload_tcp(speedtest):
     counter = 0
-    avg_transfer_rate = 0
 
     start = time_ns()
     while time_ns() - start < TIME_SECONDS * 1000000000:
