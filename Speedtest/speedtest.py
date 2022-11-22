@@ -11,8 +11,8 @@ locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 SIZE = 500
 # Mensagem
 MESSAGE = b'teste de rede *2022*' * 25
-# Número de pings
-ATTEMPTS = 20
+# Tempo em segundos
+TIME_SECONDS = 20
 
 def error():
     print(f'Formato de utilização:\n\t{sys.argv[0]} <ip> <porta> \
@@ -55,9 +55,9 @@ def download(speedtest):
 def upload_tcp(speedtest):
     counter = 0
     avg_transfer_rate = 0
-    sent = 0
 
-    for _ in range(ATTEMPTS):
+    begin = start = time_ns()
+    while start - begin < TIME_SECONDS * 1000000000:
         start = time_ns()
         speedtest.sendall(MESSAGE)
         elapsed = time_ns() - start
@@ -86,7 +86,8 @@ def upload_udp(speedtest, peer):
     counter = 0
     avg_transfer_rate = 0
 
-    for _ in range(ATTEMPTS):
+    begin = start = time_ns()
+    while start - begin < TIME_SECONDS * 1000000000:
         start = time_ns()
         speedtest.sendto(MESSAGE, peer)
         elapsed = time_ns() - start
