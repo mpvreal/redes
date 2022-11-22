@@ -10,9 +10,9 @@ locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 # Tamanho da mensagem
 SIZE = 500
 # Mensagem
-MESSAGE = b'A' * SIZE
+MESSAGE = b'teste de rede *2022*' * 25
 # Número de pings
-ATTEMPTS = 1000
+ATTEMPTS = 20
 
 def error():
     print(f'Formato de utilização:\n\t{sys.argv[0]} <ip> <porta> \
@@ -48,11 +48,14 @@ def download(speedtest):
         print(f'Erro: Nenhum pacote recebido.\nAbortando.')
         exit(1)
 
+    print(f'Pacotes recebidos: {counter}')
+
     return avg_transfer_rate
 
 def upload_tcp(speedtest):
     counter = 0
     avg_transfer_rate = 0
+    sent = 0
 
     for _ in range(ATTEMPTS):
         start = time_ns()
@@ -74,6 +77,8 @@ def upload_tcp(speedtest):
     except ZeroDivisionError:
         print(f'Erro: Nenhum pacote recebido.\nAbortando.')
         exit(1)
+
+    print(f'Pacotes enviados: {counter}')
 
     return avg_transfer_rate
 
@@ -101,6 +106,8 @@ def upload_udp(speedtest, peer):
     except ZeroDivisionError:
         print(f'Erro: Nenhum pacote recebido.\nAbortando.')
         exit(1)
+
+    print(f'Pacotes enviados: {counter}')
 
     return avg_transfer_rate
 
