@@ -64,14 +64,14 @@ if(len(sys.argv) < 3):
 
 elif(sys.argv[3] == 'tcp'):
     speedtest = socket(AF_INET, SOCK_STREAM)
-    speedtest.settimeout(5)
+    speedtest.settimeout(10)
 
     if(sys.argv[1] == 'listen'):
         speedtest.bind((gethostbyname(gethostname()), 
             int(sys.argv[2])))
         
         try:
-            speedtest.listen(1)
+            speedtest.listen(5)
             print('Aguardando conexão...')
             speedtest, address = speedtest.accept()
         except:
@@ -126,7 +126,7 @@ elif(sys.argv[3] == 'tcp'):
 
 elif(sys.argv[3] == 'udp'):
     speedtest = socket(AF_INET, SOCK_DGRAM)
-    speedtest.settimeout(5)
+    speedtest.settimeout(10)
 
     if(sys.argv[1] == 'listen'):
         speedtest.bind((gethostbyname(gethostname()), 
